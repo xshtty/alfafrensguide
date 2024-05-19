@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galería de Imágenes</title>
+    <style>
+        body {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+        .image-container {
+            width: 300px;
+            margin: 10px;
+        }
+        .image-container img {
+            width: 100%;
+            height: auto;
+            aspect-ratio: 16 / 9;
+        }
+    </style>
+</head>
+<body>
+    <!-- Generar las imágenes automáticamente -->
+    <script>
+        const numImages = 33;
+        const container = document.body;
+        for (let i = 1; i <= numImages; i++) {
+            const imageContainer = document.createElement('div');
+            imageContainer.className = 'image-container';
+            const img = document.createElement('img');
+            img.src = `alfafrensv2_jpeg.${i.toString().padStart(3, '0')}.jpeg`;
+            img.alt = `Imagen ${i}`;
+            imageContainer.appendChild(img);
+            container.appendChild(imageContainer);
+        }
+    </script>
+</body>
+</html>
