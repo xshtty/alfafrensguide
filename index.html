@@ -5,22 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Galería de Imágenes</title>
     <style>
-        body {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            background-color: #f0f0f0;
+        body, html {
             margin: 0;
             padding: 0;
-        }
-        .image-container {
-            width: 300px;
-            margin: 10px;
-        }
-        .image-container img {
             width: 100%;
-            height: auto;
-            aspect-ratio: 16 / 9;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #000;
+        }
+        img {
+            max-width: 100%;
+            max-height: 100%;
+            display: none;
+        }
+        img.active {
+            display: block;
         }
     </style>
 </head>
@@ -29,15 +30,32 @@
     <script>
         const numImages = 33;
         const container = document.body;
+        let currentImageIndex = 0;
+
+        function showImage(index) {
+            const images = document.querySelectorAll('img');
+            images.forEach((img, idx) => {
+                img.classList.remove('active');
+                if (idx === index) {
+                    img.classList.add('active');
+                }
+            });
+        }
+
         for (let i = 1; i <= numImages; i++) {
-            const imageContainer = document.createElement('div');
-            imageContainer.className = 'image-container';
             const img = document.createElement('img');
             img.src = `alfafrensv2_jpeg.${i.toString().padStart(3, '0')}.jpeg`;
             img.alt = `Imagen ${i}`;
-            imageContainer.appendChild(img);
-            container.appendChild(imageContainer);
+            container.appendChild(img);
         }
+
+        document.addEventListener('click', () => {
+            currentImageIndex = (currentImageIndex + 1) % numImages;
+            showImage(currentImageIndex);
+        });
+
+        // Mostrar la primera imagen inicialmente
+        showImage(currentImageIndex);
     </script>
 </body>
 </html>
